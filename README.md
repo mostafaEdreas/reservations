@@ -9,4 +9,8 @@ Business Requirements Understanding:
 
 Feature Suggestion:
 add payment methods
+
+
+
+Note: admin role can makes any change for any route but user role is limited
  

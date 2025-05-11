@@ -16,7 +16,7 @@ class ServiceController extends ApiController
         $this->middleware('auth:sanctum');
         $this->middleware('IsAdminApi')->except('index') ;
     }
-    public function index()  
+    public function index()
     {
         $services = $this->service_service->list() ;
         $services = ServiceResource::collection($services);
@@ -26,7 +26,7 @@ class ServiceController extends ApiController
         ]);
     }
 
-    public function active()  
+    public function active()
     {
         $services = $this->service_service->listActive() ;
         $services = ServiceResource::collection($services);
@@ -37,8 +37,8 @@ class ServiceController extends ApiController
     }
 
 
-    public function store(ServiceRequest $request)  
-    {        
+    public function store(ServiceRequest $request)
+    {
         $service = $this->service_service->create($request->validated()) ;
         $service = new ServiceResource($service);
         return $service->additional([
@@ -47,33 +47,38 @@ class ServiceController extends ApiController
         ]);
     }
 
-    public function show( Service $service)  
+    public function show( Service $service)
     {
         $service = new ServiceResource($service);
         return $service->additional([
             'status' => 200,
             'message' => 'success'
-        ]);    
-    
+        ]);
+
     }
-    public function update(ServiceRequest $request, Service $service)  
+    public function update(ServiceRequest $request, Service $service)
     {
         $this->service_service->update($service,$request->validated());
-        $service = new ServiceResource($service);
+        $service = new ServiceResource($service->refresh());
         return $service->additional([
             'status' => 200,
             'message' => 'success'
         ]);    }
 
-    public function destroy(Service $service)  
+    public function destroy(Service $service)
     {
        $this->service_service->delete($service);
-       return $this->successResponse([],'service deleted successfully');    
+       return $this->successResponse([],'service deleted successfully');
     }
 
-    
-    public function changeStatus (Service $service)  
+
+    public function changeStatus (Service $service)
     {
        $this->service_service->toggleStatus($service);
-        return $this->successResponse([],'service changed successfully');        }
+       $service = new ServiceResource($service->refresh());
+        return $service->additional([
+            'status' => 200,
+            'message' => 'success'
+        ]);
+    }
 }

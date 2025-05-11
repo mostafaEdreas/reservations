@@ -1,0 +1,782 @@
+{
+	"info": {
+		"_postman_id": "f3174e85-455f-4cec-8718-7d5206ff0ca3",
+		"name": "reservation app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26503854"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "3|IMMcaORnBT7hHdgaXz9lagJZsxeH0hrRdtfNVo3q290e4b5a",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "password_confirmation",
+									"value": "123456789",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456789",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "testapiadmin",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "testapiadmin@test.com",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "admin",
+									"description": "admin or user",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://reservation.test/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"reservation",
+								"test"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1|PxNgZg7cTBMjkFNgDZqhMp5Vo4CXEpIVh0f7mprrf74f3581",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "password_confirmation",
+									"value": "123456789",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456789",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "testapiUser",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "testapiUser@test.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://reservation.test/api/auth/logout",
+							"protocol": "http",
+							"host": [
+								"reservation",
+								"test"
+							],
+							"path": [
+								"api",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "services",
+					"item": [
+						{
+							"name": "getServices",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "1|PxNgZg7cTBMjkFNgDZqhMp5Vo4CXEpIVh0f7mprrf74f3581",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "http://reservation.test/api/services",
+									"protocol": "http",
+									"host": [
+										"reservation",
+										"test"
+									],
+									"path": [
+										"api",
+										"services"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "reservations",
+					"item": [
+						{
+							"name": "Get Reservations",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "3|IMMcaORnBT7hHdgaXz9lagJZsxeH0hrRdtfNVo3q290e4b5a",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "http://reservation.test/api/reservations/user",
+									"protocol": "http",
+									"host": [
+										"reservation",
+										"test"
+									],
+									"path": [
+										"api",
+										"reservations",
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Save reservation",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "3|IMMcaORnBT7hHdgaXz9lagJZsxeH0hrRdtfNVo3q290e4b5a",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "reservation_date",
+											"value": "2025-5-20 22:30:20",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://reservation.test/api/reservations/store/2",
+									"protocol": "http",
+									"host": [
+										"reservation",
+										"test"
+									],
+									"path": [
+										"api",
+										"reservations",
+										"store",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update reservation",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "3|IMMcaORnBT7hHdgaXz9lagJZsxeH0hrRdtfNVo3q290e4b5a",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"reservation_date\":\"19-05-2025 22:30:20\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://reservation.test/api/reservations/update/2",
+									"protocol": "http",
+									"host": [
+										"reservation",
+										"test"
+									],
+									"path": [
+										"api",
+										"reservations",
+										"update",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cancel Reservation",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "3|IMMcaORnBT7hHdgaXz9lagJZsxeH0hrRdtfNVo3q290e4b5a",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"reservation_date\":\"19-05-2025 22:30:20\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://reservation.test/api/reservations/cancel/2",
+									"protocol": "http",
+									"host": [
+										"reservation",
+										"test"
+									],
+									"path": [
+										"api",
+										"reservations",
+										"cancel",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "admin",
+			"item": [
+				{
+					"name": "services",
+					"item": [
+						{
+							"name": "Save Service",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "3|IMMcaORnBT7hHdgaXz9lagJZsxeH0hrRdtfNVo3q290e4b5a",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "test1",
+											"type": "text"
+										},
+										{
+											"key": "price",
+											"value": "500",
+											"type": "text"
+										},
+										{
+											"key": "desciription",
+											"value": "testttfrom api",
+											"type": "text"
+										},
+										{
+											"key": "status",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://reservation.test/api/admin/services",
+									"protocol": "http",
+									"host": [
+										"reservation",
+										"test"
+									],
+									"path": [
+										"api",
+										"admin",
+										"services"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Change Status",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "3|IMMcaORnBT7hHdgaXz9lagJZsxeH0hrRdtfNVo3q290e4b5a",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "http://reservation.test/api/admin/services/change-status/2",
+									"protocol": "http",
+									"host": [
+										"reservation",
+										"test"
+									],
+									"path": [
+										"api",
+										"admin",
+										"services",
+										"change-status",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Services",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "3|IMMcaORnBT7hHdgaXz9lagJZsxeH0hrRdtfNVo3q290e4b5a",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "http://reservation.test/api/admin/services",
+									"protocol": "http",
+									"host": [
+										"reservation",
+										"test"
+									],
+									"path": [
+										"api",
+										"admin",
+										"services"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Services",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "3|IMMcaORnBT7hHdgaXz9lagJZsxeH0hrRdtfNVo3q290e4b5a",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "http://reservation.test/api/admin/services/1",
+									"protocol": "http",
+									"host": [
+										"reservation",
+										"test"
+									],
+									"path": [
+										"api",
+										"admin",
+										"services",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "reservations",
+					"item": [
+						{
+							"name": "Get Reservations",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "3|IMMcaORnBT7hHdgaXz9lagJZsxeH0hrRdtfNVo3q290e4b5a",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "http://reservation.test/api/reservations",
+									"protocol": "http",
+									"host": [
+										"reservation",
+										"test"
+									],
+									"path": [
+										"api",
+										"reservations"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Confirm Reservation",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "3|IMMcaORnBT7hHdgaXz9lagJZsxeH0hrRdtfNVo3q290e4b5a",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"reservation_date\":\"19-05-2025 22:30:20\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://reservation.test/api/admin/reservations/confirm/2",
+									"protocol": "http",
+									"host": [
+										"reservation",
+										"test"
+									],
+									"path": [
+										"api",
+										"admin",
+										"reservations",
+										"confirm",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Done Reservation",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "3|IMMcaORnBT7hHdgaXz9lagJZsxeH0hrRdtfNVo3q290e4b5a",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"reservation_date\":\"19-05-2025 22:30:20\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://reservation.test/api/admin/reservations/confirm/2",
+									"protocol": "http",
+									"host": [
+										"reservation",
+										"test"
+									],
+									"path": [
+										"api",
+										"admin",
+										"reservations",
+										"confirm",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Reject Reservation",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "3|IMMcaORnBT7hHdgaXz9lagJZsxeH0hrRdtfNVo3q290e4b5a",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"reservation_date\":\"19-05-2025 22:30:20\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://reservation.test/api/admin/reservations/reject/2",
+									"protocol": "http",
+									"host": [
+										"reservation",
+										"test"
+									],
+									"path": [
+										"api",
+										"admin",
+										"reservations",
+										"reject",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}

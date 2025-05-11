@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\ApiController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ReservationRequest;
 use App\Http\Resources\ReservationResource;
@@ -10,7 +11,7 @@ use App\Models\Service;
 use App\Services\ReservationService;
 use Illuminate\Http\Request;
 
-class ReservationController extends Controller
+class ReservationController extends ApiController
 {
     private const ADMIN_METHODS = [
         'index',
@@ -40,43 +41,67 @@ class ReservationController extends Controller
 
     public function confirm(Reservation $reservation) {
         $this->reservation_service->confirm($reservation) ;
-        return $this->successResponse([],'reservation confirmed successfully');
+          $reservation = new ReservationResource( $reservation->refresh());
+        return $reservation->additional([
+            'status' => 200,
+            'message' => 'success'
+        ]);
     }
 
     public function reject(Reservation $reservation) {
         $this->reservation_service->reject($reservation) ;
-        return $this->successResponse([],'reservation rejected successfully');
+       $reservation = new ReservationResource( $reservation->refresh());
+        return $reservation->additional([
+            'status' => 200,
+            'message' => 'success'
+        ]);
     }
 
 
     public function done(Reservation $reservation) {
         $this->reservation_service->done($reservation) ;
-        return $this->successResponse([],'reservation is done');
+       $reservation = new ReservationResource( $reservation->refresh());
+        return $reservation->additional([
+            'status' => 200,
+            'message' => 'success'
+        ]);
     }
     public function store(ReservationRequest $request ,Service $service)
     {
         $request_validated = $request->validated() ;
         $request_validated['user_id'] = auth('sanctum')->user()->id ;
         $request_validated['service_id'] = $service->id ;
-        $data = $this->reservation_service->create($request_validated) ;
-        return $this->successResponse([],'reservation created successfully');
+        $reservation = $this->reservation_service->create($request_validated) ;
+       $reservation = new ReservationResource( $reservation);
+        return $reservation->additional([
+            'status' => 200,
+            'message' => 'success'
+        ]);
     }
 
      public function update(ReservationRequest $request ,Reservation $reservation)
     {
         $request_validated = $request->validated() ;
-        $data = $this->reservation_service->update($reservation,$request_validated) ;
-        return redirect()->to('reservations')->with('success',value: 'your reservation updated successfully');
+        $this->reservation_service->update($reservation,$request_validated) ;
+       $reservation = new ReservationResource( $reservation->refresh());
+        return $reservation->additional([
+            'status' => 200,
+            'message' => 'success'
+        ]);
     }
     public function cancel(Reservation $reservation)
     {
         $this->reservation_service->cancel($reservation);
-        return $this->successResponse([],'reservation cancled successfully');
+       $reservation = new ReservationResource( $reservation->refresh());
+        return $reservation->additional([
+            'status' => 200,
+            'message' => 'success'
+        ]);
     }
 
-    public function listForAuth()        
+    public function listForUser()
     {
-        $reservations =  Reservation::where('user_id', auth('sanctum')->user()->id)->latest()->get();
+         $reservations = $this->reservation_service->listForUser(auth('sanctum')->user()->id);
         $reservations = ReservationResource::collection( $reservations);
         return $reservations->additional([
             'status' => 200,

@@ -12,7 +12,7 @@ class ServiceRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return auth()->user()->is_admin;
+        return auth()->user()->is_admin  || auth( 'sanctum')->user()->is_admin;
     }
 
     /**
@@ -23,12 +23,12 @@ class ServiceRequest extends FormRequest
     public function rules(): array
     {
         return [
-        
+
             'name' => 'required|string|max:255|unique:services,name,' . $this->route('service')?->id,
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:0',
             'status' => 'required|boolean',
-            'role' => 'nullable|in:' . implode(',', Service::ROLE_ENUM),           
+            'role' => 'nullable|in:' . implode(',', Service::ROLE_ENUM),
         ];
     }
 }

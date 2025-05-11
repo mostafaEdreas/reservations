@@ -19,11 +19,11 @@ class ReservationService
         return $reservation->update($data);
     }
 
-    public function list()  
+    public function list()
     {
         return Reservation::latest()->cursorPaginate(100);
     }
-    
+
 
     public function confirm(Reservation $reservation): bool
     {
@@ -45,9 +45,9 @@ class ReservationService
         return $reservation->update(['status' => Reservation::REJECTED['value']]);
     }
 
-    public function listForUser($userId):array | Collection        
+    public function listForUser($userId)
     {
-        return Reservation::where('user_id', $userId)->latest()->get();
+        return Reservation::where('user_id', $userId)->latest()->cursorPaginate(100);;
     }
 
 

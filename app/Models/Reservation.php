@@ -7,16 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reservation extends Model
 {
-    
+
     use HasFactory;
 
 
-        // i was need use it in validtion request 
+        // i was need use it in validtion request
     const PENDING   =  ['value' => 0 ,'alis'=>'pending']  ;
-    const CONFIRMED =  ['value' => 1 ,'alis'=>'confirmed']  ; 
-    const DONE =  ['value' => 2 ,'alis'=>'done' ] ; 
-    const CANCELED = ['value' => 3 ,'alis'=>'cancelled' ] ; 
-    const REJECTED  =  ['value' => 4 ,'alis'=>'rejected' ]  ; 
+    const CONFIRMED =  ['value' => 1 ,'alis'=>'confirmed']  ;
+    const DONE =  ['value' => 2 ,'alis'=>'done' ] ;
+    const CANCELED = ['value' => 3 ,'alis'=>'cancelled' ] ;
+    const REJECTED  =  ['value' => 4 ,'alis'=>'rejected' ]  ;
     protected $fillable = [
         'user_id',
         'service_id',
@@ -36,6 +36,9 @@ class Reservation extends Model
         ];
     }
 
+    protected $casts = [
+        'reservation_date' => 'datetime',
+    ];
     public function service(){
         return $this->belongsTo(Service::class);
     }
@@ -56,5 +59,5 @@ class Reservation extends Model
 
         return 'unknown';
     }
-   
+
 }

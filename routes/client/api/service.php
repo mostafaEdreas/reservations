@@ -6,3 +6,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['controller' => ServiceController::class,'prefix' => 'services' ],function(){
     Route::get('/','index');
 });
+
+Route::group(['controller' => ServiceController::class],function(){
+    Route::get('/','index');
+});
